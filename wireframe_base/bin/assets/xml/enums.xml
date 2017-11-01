@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<enums>
+	
+	<colours>
+		<item id="PRIMARY" hex="#f3be16" />
+		<item id="SECONDARY" hex="#7aaa41" />
+		<item id="TERTIARY" hex="#121919" />
+		<item id="WHITE" hex="#f1f1f2" />
+		<item id="GREY" hex="#bbbbb4" />
+		<item id="BLACK" hex="#010101" />
+		<item id="GREY_LIGHT_1" hex="#f2f1ec" />
+		<item id="GREY_LIGHT_2" hex="#f2f2f2" />
+		<item id="GREY_DARK_1" hex="#121919" />
+		<item id="GREY_DARK_2" hex="#121212" />
+		<item id="LINK" hex="#f3be16" />
+		<item id="HOVER" hex="#333333" />
+	</colours>
+	
+</enums>
