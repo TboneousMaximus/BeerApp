@@ -22,6 +22,8 @@ class MenuButton extends Component
 		super(div);
 		this.div.addClass('menu-button');
 
+		this.div.append('<a><div class="checkbox"><i class="fa fa-check"/></div><span></span></a>');
+
 		this.div.on('click', ()=>this.onSelect());
 	}
 
@@ -31,12 +33,14 @@ class MenuButton extends Component
 		menuItem.component = this;
 		menuItem.menu = menu;
 
-		if (menu.type == 'radio'){
-			this.div.append('<a>'+ menuItem.label +'</a>');
-		}else if (menu.type == 'check'){
-			this.div.append('<a><div class="checkbox"><i class="fa fa-check"/></div>'+ menuItem.label +'</a>');
-		}
-		
+		this.div.addClass('type-'+ menu.type);
+		this.div.find('span').html( menuItem.label );
+	}
+
+	// required for menu with text-overflowellipsis and white-space:nowrap
+	public addToolTip():void{
+		this.div.find('a').attr('alt', this.menuItem.label);
+		this.div.find('a').attr('title', this.menuItem.label);
 	}
 
 	// used as ninja select to trigger as though user clicked

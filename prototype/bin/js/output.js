@@ -58,7 +58,7 @@ var Model = (function (_super) {
     __extends(Model, _super);
     function Model() {
         var _this = _super.call(this) || this;
-        _this.version = '0.6.0';
+        _this.version = '0.6.1';
         _this.beers = [];
         _this.beerStyles = [];
         return _this;
@@ -568,6 +568,7 @@ var MenuButton = (function (_super) {
     function MenuButton(div) {
         var _this = _super.call(this, div) || this;
         _this.div.addClass('menu-button');
+        _this.div.append('<a><div class="checkbox"><i class="fa fa-check"/></div><span></span></a>');
         _this.div.on('click', function () { return _this.onSelect(); });
         return _this;
     }
@@ -576,12 +577,10 @@ var MenuButton = (function (_super) {
         menuItem.target = this.div;
         menuItem.component = this;
         menuItem.menu = menu;
-        if (menu.type == 'radio') {
-            this.div.append('<a>' + menuItem.label + '</a>');
-        }
-        else if (menu.type == 'check') {
-            this.div.append('<a><div class="checkbox"><i class="fa fa-check"/></div>' + menuItem.label + '</a>');
-        }
+        this.div.addClass('type-' + menu.type);
+        this.div.find('a').attr('alt', menuItem.label);
+        this.div.find('a').attr('title', menuItem.label);
+        this.div.find('span').html(menuItem.label);
     };
     MenuButton.prototype.onSelect = function () {
         if (!this.menuItem.enabled)

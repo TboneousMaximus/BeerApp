@@ -5,7 +5,7 @@
 
 class Model extends ModelBase 
 {
-	public version:string = '0.6.0';
+	public version:string = '0.6.1';
 
 	// data
 	public beers:BeerItem[] = [];
