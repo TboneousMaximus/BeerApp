@@ -1,0 +1,80 @@
+.text-left		{ text-align: left; }
+.text-right		{ text-align: right; }
+.text-center	{ text-align: center; }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  display: block;
+}
+
+h1, h2,
+.h1, .h2 {
+	color:				@heading-color;
+	font-family:	@heading-font-family;
+	font-weight:	@heading-font-weight;
+	line-height:	@heading-line-height;
+	margin:				@heading-margin;
+	text-transform: uppercase;
+}
+h3, h4, h5, h6,
+.h3, .h4, .h5, .h6 {
+	color:				@subheading-color;
+	font-family:	@subheading-font-family;
+	font-weight:	@subheading-font-weight;
+	line-height:	@subheading-line-height;
+	margin:				@subheading-margin;
+}
+// h1, .h1 { font-size: unit( @font-size-base * 3.15, px); }
+// h2, .h2 { font-size: unit( @font-size-base * 2.35, px); }
+// h3, .h3 { font-size: unit( @font-size-base * 1.618, px); }
+// h4, .h4 { font-size: unit( @font-size-base * 1, px); }
+// h5, .h5 { font-size: unit( @font-size-base * .85, px); }
+// h6, .h6 { font-size: unit( @font-size-base * .7, px); }
+
+h1, .h1 { font-size: 3.15em }
+h2, .h2 { font-size: 2.35em }
+h3, .h3 { font-size: 1.618em }
+h4, .h4 { font-size: 1em }
+h5, .h5 { font-size: .85em }
+h6, .h6 { font-size: .7em }
+
+h5, h6,
+.h5, .h6 {
+  text-transform: uppercase;
+}
+
+p {
+  line-height: 1.33em;
+}
+
+strong {
+	font-weight: 700;
+
+  &.semi { font-weight: 500; }
+}
+
+.thin {	font-weight: 300; }
+
+
+.copy {
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: inherit;
+    margin: .3142em 0 .618em 0;
+
+    &:last-child {
+      margin-bottom: .3142em;
+    }
+  }
+
+  p {
+    &:first-child { margin-top: 0; }
+    &:last-child  { margin-bottom: 0; }
+  }
+}
+
+.larger-line-height {
+  p, li {
+    line-height: 1.618em;
+  }
+}

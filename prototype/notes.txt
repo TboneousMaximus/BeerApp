@@ -1,0 +1,21 @@
+Was unable to get BreweryDB API due to an Access-Control-Allow-Origin error.
+
+
+Chrome 62.0.3202.75
+
+"Failed to load https://api.brewerydb.com/v2/beers?styleId=1&key=865b6a5e9890188485b0004a1563a12a: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost' is therefore not allowed access."
+
+
+Firefox 56.0.2
+
+"Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://api.brewerydb.com/v2/beers?styleId=1&key=865b6a5e9890188485b0004a1563a12a. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing)."
+
+
+Internet Explorer 11.09600.18816
+
+"SEC7118: XMLHttpRequest for https://api.brewerydb.com/v2/beers?styleId=1&key=865b6a5e9890188485b0004a1563a12a required Cross Origin Resource Sharing (CORS)."
+
+
+
+
+Have used temp data to prepare and build most of the app, then will merge once I resolve the cross domain issue.

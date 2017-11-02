@@ -1,0 +1,463 @@
+// Core variables and mixins
+@import "../../less/variables.less";
+@import "../../less/mixins.less";
+
+// Core CSS
+@import "../../less/base.less";
+@import "../../less/type.less";
+@import "../../less/tables.less";
+@import "../../less/forms.less";
+
+// Components
+//@import "x.less";
+
+
+
+//////////////////////////////
+//
+// MENU
+//
+//////////////////////////////
+
+.menu {
+  position: relative;
+  display: block;
+  width: 100%;
+
+  ul {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      padding: 0;
+      a {
+        display: block;
+        padding: .618em;
+        color: inherit;
+      }
+    }
+  }
+
+  ul.options-container {
+    .clearfix;
+  }
+
+  li.menu-button {
+    position: relative;
+    display: block;
+    float: left;
+    cursor: pointer;
+    overflow: hidden;
+    .clearfix;
+
+    .checkbox {
+      float: left;
+      padding: 0 .4em;
+      background-color: fade(white, 80%);
+      border-radius: .25em;
+      margin-right: .618em;
+
+      .transition(~'background-color 300ms ease');
+
+      i.fa {
+        position: relative;
+        color: @text-color !important;
+        .transition(~'transform 300ms ease, opacity 300ms ease');
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    &.selected {
+      .checkbox i.fa {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      .checkbox {
+        background-color: fade(white, 96%);
+      }
+    }
+  }
+}
+
+
+
+//////////////////////////////
+//
+// RANGES VIEW
+//
+//////////////////////////////
+
+.range-view {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.618em;
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  h6 {
+    margin-top: 0;
+  }
+
+  .range-indicator {
+    position: relative;
+    width: 100%;
+    height: @font-size-small;
+    margin-bottom: .15em;
+    background-color: fade(white, 96%);
+    border-radius: .5em;
+
+    .range-indicator-bar {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: @brand-secondary;
+
+      .transition(~'margin 300ms ease, width 300ms ease');
+
+      .range-indicator-dial {
+        position: absolute;
+        top: 50%;
+        background-color: white;
+        border: 1px solid @brand-secondary;
+        border-radius: 50%;
+        padding: .5em;
+
+        &:nth-child(1){
+          left: 0;
+          .translate3d(-50%, -50%, 0);
+        }
+
+        &:nth-child(2){
+          right: 0;
+          .translate3d(50%, -50%, 0);
+        }
+      }
+    }
+  }
+
+  .range-values {
+    .clearfix;
+    font-size: @font-size-small;
+
+    .range-from, .range-to {
+      .clearfix;
+    }
+
+    .range-from {
+      float: left;
+    }
+    .range-to {
+      float: right;
+    }
+  }
+}
+
+
+
+//////////////////////////////
+//
+// BEER APPLICATION
+//
+//////////////////////////////
+
+#beer_application {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: @brand-grey-lighter;
+}
+
+
+
+#filter_view {
+  position: absolute;
+  display: table;
+  background-color: @brand-grey-dark;
+  width: 100%;
+  min-height: 100px;
+  padding: 1.618em;
+  z-index: 99;
+
+  #filter_menu {
+    display: table-cell;
+    width: 66%;
+    vertical-align: top;
+    padding-right: 1.618em;
+
+    // SMELL: IE11+ (do JS column shift script)
+    // display: flex;
+    // flex-direction: column;
+    // flex-wrap: wrap;
+
+    .options-container {
+      font-size: @font-size-small;
+    }
+
+    li.menu-button {
+      width: 25%;
+      
+      a {
+        padding: .618em 1em;
+      }
+
+      &.selected {
+        // color: #111;
+      }
+      
+      &:hover {
+        color: #111;
+      }
+    }
+
+  }
+
+  #filter_ranges {
+    display: table-cell;
+    width: 34%;
+    padding: 0 4%;
+    vertical-align: middle;
+  }
+}
+
+
+
+
+
+//////////////////////////////
+//
+//  PRESENTATION VIEW
+//
+//////////////////////////////
+
+#presentation_view {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  // <SCRIPT> set to #filter_view.outerHeight on resize
+  padding-top: 100px;
+
+
+  #presentation_menu {
+    position: relative;
+    display: block;
+    width: 25%;
+    height: 100%;
+    float: left;
+    font-weight: bold;
+    background-color: @brand-grey-light;
+    overflow-y: auto;
+
+    .options-container {
+      font-size: .9em;
+    }
+
+    .heading {
+      padding-left: 1.618em;
+      padding-left: 1.618rem; // SMELL: layout more compatible
+      margin-top: 2.35em;
+      margin-bottom: 1.35em;
+    }
+
+    .menu-button {
+      width: 100%;
+      color: @brand-primary;
+
+      a {
+        border-top: 1px solid @brand-grey;
+        padding: .618em 1.618em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &:last-child a {
+        border-bottom: 1px solid @brand-grey;
+      }
+
+      &:hover {
+        background-color: @link-hover-color;
+        color: white;
+      }
+
+      &.selected {
+        background-color: @link-focus-color;
+        color: white;
+      }
+    }
+
+  }
+
+
+
+  //////////////////////////////
+  //
+  //  PRESENTATION CONTENT
+  //
+  //////////////////////////////
+
+  #presentation_content {
+    position: relative;
+    display: block;
+    width: 75%;
+    height: 100%;
+    float: left;
+    background-color: @brand-grey-lighter;
+
+    .presentation-content-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 3.5em 8% 2em 4%;
+      overflow-y: auto;
+      z-index: 1;
+
+      .figure-view, .details-view {
+        .transition(~"transform 600ms, opacity 600ms ease");
+      }
+
+      &.hide {
+        z-index: 0;
+        .figure-view, .details-view {
+          transform: scale(.8);
+          opacity: 0;
+          .transition(~"transform 300ms, opacity 300ms ease");
+        }
+      }
+
+      .figure-view {
+        width: 45%;
+        min-height: 100%;
+        float: left;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .details-view {
+        width: 50%;
+        float: right;
+        
+        h6 {
+          color: @brand-primary;
+        }
+
+        > div {
+          margin-bottom: 1.618em;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        span {
+          display: block;
+          font-weight: bold;
+          font-size: 1.25em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding-bottom: .15em; // fixes descender cut off
+        }
+
+        .beer-description {
+          .larger-line-height;
+        }
+
+        .beer-values {
+          width: 100%;
+          .clearfix;
+
+          > div {
+            float: left;
+            width: 25%;
+            padding-right: .618em;
+            .clearfix;
+          } 
+        }
+
+        .beer-style {
+          //
+        }
+      }
+
+    }
+  }
+}
+
+
+
+
+
+//////////////////////////////
+//
+//  BREAKPOINTS
+//
+//////////////////////////////
+
+@media screen and (max-width: 1350px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+
+@media screen and (max-width: 1080px) {
+  body {
+    font-size: 15px;
+  }
+
+  #presentation_view #presentation_content .presentation-content-slide {
+    .figure-view {
+      width: 40%;
+    }
+    .details-view {
+      width: 55%;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    font-size: 14px;
+  }
+
+  #presentation_view #presentation_content .presentation-content-slide {
+    .figure-view {
+      width: 35%;
+    }
+    .details-view {
+      width: 60%;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  body {
+    font-size: 13px;
+  }
+
+  #presentation_view #presentation_content .presentation-content-slide {
+    .figure-view {
+      width: 30%;
+    }
+    .details-view {
+      width: 65%;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+}
