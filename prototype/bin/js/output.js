@@ -58,7 +58,7 @@ var Model = (function (_super) {
     __extends(Model, _super);
     function Model() {
         var _this = _super.call(this) || this;
-        _this.version = '0.6.1';
+        _this.version = '0.7.0';
         _this.beers = [];
         _this.beerStyles = [];
         return _this;
@@ -472,6 +472,7 @@ var FilterView = (function (_super) {
             menuItem.beerStyleItem = Model.get().beerStyles[i];
             menuItem.id = i;
             menuItem.label = Model.get().beerStyles[i].name;
+            menuItem.toolTip = menuItem.label;
             menuItem.menu = this.menu;
             items.push(menuItem);
         }
@@ -578,9 +579,11 @@ var MenuButton = (function (_super) {
         menuItem.component = this;
         menuItem.menu = menu;
         this.div.addClass('type-' + menu.type);
-        this.div.find('a').attr('alt', menuItem.label);
-        this.div.find('a').attr('title', menuItem.label);
         this.div.find('span').html(menuItem.label);
+        if (menuItem.toolTip) {
+            this.div.find('a').attr('alt', this.menuItem.toolTip);
+            this.div.find('a').attr('title', this.menuItem.toolTip);
+        }
     };
     MenuButton.prototype.onSelect = function () {
         if (!this.menuItem.enabled)
@@ -878,6 +881,7 @@ var Main = (function (_super) {
         _this._container = $('<div id="beer_application"></div>').appendTo($('body'));
         _this.filterView = new FilterView($('<div id="filter_view"></div>').appendTo(_this._container));
         _this.presentationView = new PresentationView($('<div id="presentation_view"></div>').appendTo(_this._container));
+        _this.curtain = new Component($('<div id="main_curtain" class="curtain"><span><strong>LOADING...</strong></span></div>').appendTo(_this._container));
         Model.get().startupCommand = new StartupCommand();
         Model.get().updateFilterCommand = new UpdateFilterCommand();
         _this.filterView.div.on(MenuEvent.SELECT, function (e) { return Model.get().updateFilterCommand.execute(); });
@@ -892,12 +896,18 @@ var Main = (function (_super) {
         this.presentationView.div.css('padding-top', this.filterView.div.outerHeight());
     };
     Main.prototype.init = function () {
+        var _this = this;
         _super.prototype.init.call(this);
         this.log('.init()');
         this.filterView.init();
         this.presentationView.init();
         Model.get().updateFilterCommand.execute();
         this.resize();
+        this.curtain.div.delay(1500).animate({
+            'opacity': 0
+        }, 800, function () {
+            _this.curtain.div.css('display', 'none');
+        });
     };
     Main.prototype.configLogs = function () {
         Model.get().logAll = true;

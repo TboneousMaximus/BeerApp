@@ -45,6 +45,7 @@ class FilterView extends Component
 			menuItem.beerStyleItem = Model.get().beerStyles[i];
 			menuItem.id = i;
 			menuItem.label = Model.get().beerStyles[i].name;
+			menuItem.toolTip = menuItem.label;
 			menuItem.menu = this.menu;
 			items.push( menuItem );
 		}

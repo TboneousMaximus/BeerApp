@@ -7,6 +7,7 @@ class MenuItem
 {
 	public id:string;
 	public label:string;
+	public toolTip:string;
 	public menu:Menu;
 	public target:JQuery;
 	public component:MenuButton;

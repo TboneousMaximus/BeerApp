@@ -35,12 +35,13 @@ class MenuButton extends Component
 
 		this.div.addClass('type-'+ menu.type);
 		this.div.find('span').html( menuItem.label );
-	}
 
-	// required for menu with text-overflowellipsis and white-space:nowrap
-	public addToolTip():void{
-		this.div.find('a').attr('alt', this.menuItem.label);
-		this.div.find('a').attr('title', this.menuItem.label);
+		// adding tool tip for all checktypes for now
+		if (menuItem.toolTip){
+			// required for menu with text-overflowellipsis and white-space:nowrap
+			this.div.find('a').attr('alt', this.menuItem.toolTip);
+			this.div.find('a').attr('title', this.menuItem.toolTip);
+		}
 	}
 
 	// used as ninja select to trigger as though user clicked

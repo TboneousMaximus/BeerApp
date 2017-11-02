@@ -10,6 +10,7 @@ class Main extends MainBase
 	public layoutTable:Component;
 	public filterView:FilterView;
 	public presentationView:PresentationView;
+	public curtain:Component;
 
 	
 	static main():void{
@@ -31,7 +32,7 @@ class Main extends MainBase
 		// views
 		this.filterView = new FilterView($('<div id="filter_view"></div>').appendTo( this._container ));
 		this.presentationView = new PresentationView($('<div id="presentation_view"></div>').appendTo( this._container ));
-		
+		this.curtain = new Component($('<div id="main_curtain" class="curtain"><span><strong>LOADING...</strong></span></div>').appendTo( this._container ));
 
 		// commands
 		Model.get().startupCommand = new StartupCommand();
@@ -74,6 +75,14 @@ class Main extends MainBase
 
 		//
 		this.resize();
+		//
+		
+		// open curtain
+		this.curtain.div.delay(1500).animate({
+			'opacity': 0
+		}, 800, ()=>{
+			this.curtain.div.css('display', 'none');
+		});
 	}
 	
 	private configLogs():void{
