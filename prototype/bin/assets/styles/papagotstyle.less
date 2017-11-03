@@ -282,19 +282,25 @@
   position: relative;
   display: block;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
 
   // <SCRIPT> set to #filter_view.outerHeight on resize
   padding-top: 100px;
 
 
   #presentation_menu {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: block;
     width: 25%;
+
+    // <SCRIPT> set to #filter_view.outerHeight on resize
+    // margin-top:0;
+
+    // <SCRIPT> set to calc(100%- #filter_view.outerHeight) on resize
     height: 100%;
-    float: left;
+
     font-weight: bold;
     background-color: @brand-grey-light;
     overflow-y: auto;
@@ -347,25 +353,29 @@
   #presentation_content {
     position: relative;
     display: block;
-    width: 75%;
-    height: 100%;
-    float: left;
+    width: 100%;
+    padding-left: 25%;
     background-color: @brand-grey-lighter;
+    .clearfix;
 
     .presentation-content-slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      padding: 3.5em 8% 2em 4%;
-      overflow-y: auto;
+      position: relative;
+      padding: 3em 8% 2em 4%;
       z-index: 1;
+      .clearfix;
 
       .figure-view, .details-view {
+        .clearfix;
         .transition(~"transform 600ms, opacity 600ms ease");
       }
 
       &.hide {
+        position: absolute;
+        top: 0;
+        right: 0;
         z-index: 0;
+        width: 75%;
+        height: 100%;
         .figure-view, .details-view {
           transform: scale(.8);
           opacity: 0;
@@ -481,6 +491,8 @@
   }
 
   #presentation_view #presentation_content .presentation-content-slide {
+    padding-top: 2.5em;
+    
     .figure-view {
       width: 35%;
     }
@@ -496,6 +508,8 @@
   }
 
   #presentation_view #presentation_content .presentation-content-slide {
+    padding-top: 2em;
+
     .figure-view {
       width: 30%;
     }

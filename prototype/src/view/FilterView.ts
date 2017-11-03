@@ -26,8 +26,9 @@ class FilterView extends Component
 		this.div.addClass('filter-view');
 
 		// SMELL: add MenuType enum
+
 		this.menu = new Menu($('<div id="filter_menu"><h6>Beer styles</h6></div>').appendTo( this.div ), 'check');
-		
+
 		// change to new view
 		this.rangesView = new RangesView($('<div id="filter_ranges"></div>').appendTo( this.div ));
 	}

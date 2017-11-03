@@ -60,7 +60,13 @@ class Main extends MainBase
 		//if (!this._initiated) return;
 		this.log('.resize()');
 
-		this.presentationView.div.css('padding-top', this.filterView.div.outerHeight());
+		// <SCRIPT> responsive solution for layout 
+		var filterHeight:number = this.filterView.div.outerHeight();
+		this.presentationView.div.css('padding-top', filterHeight);
+		this.presentationView.menu.div.css({
+			'margin-top': filterHeight,
+			'height': 'calc(100% - '+ filterHeight +'px)'
+		});
 
     }
 	
@@ -76,7 +82,7 @@ class Main extends MainBase
 		//
 		this.resize();
 		//
-		
+
 		// open curtain
 		this.curtain.div.delay(1500).animate({
 			'opacity': 0

@@ -58,7 +58,7 @@ var Model = (function (_super) {
     __extends(Model, _super);
     function Model() {
         var _this = _super.call(this) || this;
-        _this.version = '0.7.0';
+        _this.version = '0.8.3';
         _this.beers = [];
         _this.beerStyles = [];
         return _this;
@@ -684,9 +684,9 @@ var PresentationView = (function (_super) {
     function PresentationView(div) {
         var _this = _super.call(this, div) || this;
         _this.div.addClass('presentation-view');
+        _this.content = new PresentationContentView($('<div id="presentation_content"></div>').appendTo(_this.div));
         _this.menu = new Menu($('<div id="presentation_menu"><h6 class="heading">Results</h6></div>').appendTo(_this.div));
         _this.menu.div.on(MenuEvent.SELECT, function (e, but) { return _this.onSelect(but); });
-        _this.content = new PresentationContentView($('<div id="presentation_content"></div>').appendTo(_this.div));
         return _this;
     }
     PresentationView.prototype.init = function () {
@@ -893,7 +893,12 @@ var Main = (function (_super) {
     };
     Main.prototype.resize = function () {
         this.log('.resize()');
-        this.presentationView.div.css('padding-top', this.filterView.div.outerHeight());
+        var filterHeight = this.filterView.div.outerHeight();
+        this.presentationView.div.css('padding-top', filterHeight);
+        this.presentationView.menu.div.css({
+            'margin-top': filterHeight,
+            'height': 'calc(100% - ' + filterHeight + 'px)'
+        });
     };
     Main.prototype.init = function () {
         var _this = this;

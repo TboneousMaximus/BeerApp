@@ -22,10 +22,11 @@ class PresentationView extends Component
 		super(div);
 		this.div.addClass('presentation-view');
 
-		this.menu = new Menu($('<div id="presentation_menu"><h6 class="heading">Results</h6></div>').appendTo(this.div));
-		this.menu.div.on(MenuEvent.SELECT, (e:MenuEvent, but:MenuButton)=>this.onSelect(but));
 
 		this.content = new PresentationContentView($('<div id="presentation_content"></div>').appendTo(this.div));
+
+		this.menu = new Menu($('<div id="presentation_menu"><h6 class="heading">Results</h6></div>').appendTo(this.div));
+		this.menu.div.on(MenuEvent.SELECT, (e:MenuEvent, but:MenuButton)=>this.onSelect(but));
 	}
 
 	public init():void{
@@ -38,6 +39,8 @@ class PresentationView extends Component
 		var beerItem:BeerItem = menuItem.beerItem;
 		var target:PresentationContentSlide = beerItem.targetPresentation;
 		this.content.show( target );
+
+		// this.div.height( parseFloat(this.div.css('padding-top')) + parseFloat(target.div.css('height')) + parseFloat(target.div.css('padding-top')) + parseFloat(target.div.css('padding-bottom')));
 	}
 	
 
