@@ -491,7 +491,7 @@ strong.semi {
 }
 #presentation_view #presentation_content .presentation-content-slide {
   position: relative;
-  padding: 3em 8% 2em 4%;
+  padding: 3em;
   z-index: 1;
   zoom: 1;
   display: inline-block;
