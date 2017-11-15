@@ -37,38 +37,41 @@ class StartupCommand
 		// ATTEMPTS TO CONNECT TO API 
 		///////////////////////////////
 
-		// var BreweryDb = require('brewerydb-node');
-		// var brewdb = new BreweryDb('865b6a5e9890188485b0004a1563a12a');
 
-		// var callback = function(){
-		// 	console.log('callback success:', this);
-		// }
+		//////////   SUCCESSFUL !   //////////
 
-		// brewdb.beer.getById("avMkil", {}, callback);
-
-
-		// var url:string = 'https://api.brewerydb.com/v2/',
-		// 	key:string = '865b6a5e9890188485b0004a1563a12a',
-		// 	query:string = 'beers?styleId=1',
-		// 	requestUrl:string = url + query + '&key='+ key;
-			
 		// $.ajax({
-		// 	type: 'GET',
-		// 	crossDomain: true,
-		// 	url: requestUrl,
-		// 	dataType: 'xml',
-		// 	success: (event)=>{ this.onSuccessData(event); },
-		// 	error: this.onErrorLoadData
-		// });
-		
-		// $.ajax({
-		// 	type: 'GET',
-		// 	crossDomain: false,
-		// 	url: Model.get().fileAPI.assetsUrl +'xml/data.xml',
-		// 	dataType: 'xml',
-		// 	success: (event)=>{ this.onSuccessData(event); },
-		// 	error: this.onErrorLoadData
-		// });
+	 //        url: 'getBeersStyle1.php',
+	 //        type: 'POST',
+	 //        // data: {},
+	 //        success: function (result) {
+	 //        	console.log( result );
+	 //        },
+	 //        error: function () {
+	 //           alert('error');
+	 //        }
+	 //    });
+
+	    ///////////////////////////////////////
+
+
+
+
+	    //////////   SUCCESSFUL !   //////////
+
+		console.log('LOADING DATA...');
+
+		var i:number = 0, styles:number = 10;
+
+		while (i < styles){
+		 	Model.get().fileAPI.phpRequestFromAjax('getBeers.php', 'getBeersByStyleId', i.toString(), (result:any)=>{
+		 		console.log( result );
+			});
+			i++;
+		}
+
+		////////////////////////////////////////
+
 	}
 	
 	private onErrorLoadData():void{}
@@ -78,7 +81,7 @@ class StartupCommand
 
 		console.log($(data));
 
-		this.onReady();
+		// this.onReady();
 	}
 
 
@@ -127,7 +130,7 @@ class StartupCommand
 
 	// #################################################
 	// 
-	// Adding data manually due to cross domain issues
+	// Adding data manually
 	// 
 	// #################################################
 	private doTempDataStyles():void{

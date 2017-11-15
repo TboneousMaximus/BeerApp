@@ -23,6 +23,23 @@ class FileAPI
 		this.assetsUrl = this.baseUrl + 'assets/';
 	}
 
+	// SMELL: add pagination to php
+	public phpRequestFromAjax( url:string, functionId:string, valueId:string, onSuccess:Function ):void{
+		this.log('.phpRequestFromAjax('+ url +', '+ functionId +', '+ valueId +')');
+		
+		$.ajax({
+	        url: url,
+	        type: 'GET',
+    		data: { functionId:functionId, valueId:valueId },
+	        success: function (result) {
+	        	onSuccess( result );
+	        },
+	        error: function () {
+	           alert('FileAPI.phpRequestFromAjax('+ url +') >>> ERROR!');
+	        }
+	    });
+	}
+
 	
 	public preloadImages(sources:string[], callbackEach?:Function, callbackAll?:Function, id?:number):void{
 		if (!id) id = 0;

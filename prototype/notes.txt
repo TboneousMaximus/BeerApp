@@ -17,5 +17,69 @@ Internet Explorer 11.09600.18816
 
 
 
-
 Have used temp data to prepare and build most of the app, then will merge once I resolve the cross domain issue.
+
+
+
+
+/////////////////////////
+/////////////////////////
+
+I have since realised php must be used so that the key is not exposed.
+
+I have added the following to demonstrate successful intergration with the API.
+
+
+>>> StartupCommand <<<
+console.log('LOADING DATA...');
+var i:number = 0, styles:number = 10;
+while (i < styles){
+ 	Model.get().fileAPI.phpRequestFromAjax('getBeers.php', 'getBeersByStyleId', i.toString(), (result:any)=>{
+ 		console.log( result );
+	});
+	i++;
+}
+
+
+>>> FileAPI <<<
+public phpRequestFromAjax( url:string, functionId:string, valueId:string, onSuccess:Function ):void{
+	this.log('.phpRequestFromAjax('+ url +', '+ functionId +', '+ valueId +')');
+	
+	$.ajax({
+        url: url,
+        type: 'GET',
+		data: { functionId:functionId, valueId:valueId },
+        success: function (result) {
+        	onSuccess( result );
+        },
+        error: function () {
+           alert('FileAPI.phpRequestFromAjax('+ url +') >>> ERROR!');
+        }
+    });
+}
+
+
+>>> getBeers.php <<<
+<?php
+
+	$functionId = $_GET['functionId'];
+	$valueId = $_GET['valueId'];
+
+	if ($functionId == 'getBeersByStyleId') getBeersByStyleId( $valueId );
+
+	/*
+		Add pagination to echo json array of page count from page 1
+	*/
+
+	function getBeersByStyleId( $id ){
+		$json_url = "https://api.brewerydb.com/v2/beers?styleId=". $id  ."&key=865b6a5e9890188485b0004a1563a12a&format=json";
+
+		$json = file_get_contents( $json_url );
+
+		echo json_encode( $json );
+	}
+?>
+
+
+/////////////////////////
+/////////////////////////

@@ -58,7 +58,7 @@ var Model = (function (_super) {
     __extends(Model, _super);
     function Model() {
         var _this = _super.call(this) || this;
-        _this.version = '0.8.3';
+        _this.version = '0.9.3';
         _this.beers = [];
         _this.beerStyles = [];
         return _this;
@@ -77,12 +77,19 @@ var StartupCommand = (function () {
     StartupCommand.prototype.loadData = function () {
         this.log('.loadData()');
         this.onSuccessDataTemp();
+        console.log('LOADING DATA...');
+        var i = 0, styles = 10;
+        while (i < styles) {
+            Model.get().fileAPI.phpRequestFromAjax('getBeers.php', 'getBeersByStyleId', i.toString(), function (result) {
+                console.log(result);
+            });
+            i++;
+        }
     };
     StartupCommand.prototype.onErrorLoadData = function () { };
     StartupCommand.prototype.onSuccessData = function (data) {
         this.log('.onSuccessData()');
         console.log($(data));
-        this.onReady();
     };
     StartupCommand.prototype.onSuccessDataTemp = function () {
         var _this = this;
@@ -300,6 +307,20 @@ var FileAPI = (function () {
         this.baseUrl = String(window.location).substr(0, String(window.location).lastIndexOf('/') + 1);
         this.assetsUrl = this.baseUrl + 'assets/';
     }
+    FileAPI.prototype.phpRequestFromAjax = function (url, functionId, valueId, onSuccess) {
+        this.log('.phpRequestFromAjax(' + url + ', ' + functionId + ', ' + valueId + ')');
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: { functionId: functionId, valueId: valueId },
+            success: function (result) {
+                onSuccess(result);
+            },
+            error: function () {
+                alert('FileAPI.phpRequestFromAjax(' + url + ') >>> ERROR!');
+            }
+        });
+    };
     FileAPI.prototype.preloadImages = function (sources, callbackEach, callbackAll, id) {
         var _this = this;
         if (!id)
